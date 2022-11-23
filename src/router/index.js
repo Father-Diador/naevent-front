@@ -1,25 +1,51 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import {createRouter, createWebHistory} from 'vue-router'
+
+import WebPage from '@/components/WebPage.vue'
+import HomePage from '@/components/content/pages/HomePage.vue'
+import EventCard from '@/components/content/cards/EventCard.vue'
+// import SignIn from '@/components/auth/SignIn.vue'
+// import SignUp from '@/components/auth/SignUp.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'webpage',
+    component: WebPage,
+    meta: {
+        title: ''
+    },
+    children: [
+        {
+            path: '',
+            component: HomePage,
+            name: 'index',
+            meta: {
+                title: 'Главная'
+            },
+            beforeEnter: scrollToTop,
+        },
+        {
+          path: '/eventcard/:id',
+          component: EventCard,
+          meta: {
+              title: 'Карточка ивента'
+          },
+          beforeEnter: scrollToTop,
+      },
+    ],
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
 ]
 
+
+function scrollToTop(to, from, next) {
+    next()
+    window.scrollTo(0,0);
+}
+
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+  mode: 'history',
+  history: createWebHistory(),
+  routes,
 })
 
 export default router
