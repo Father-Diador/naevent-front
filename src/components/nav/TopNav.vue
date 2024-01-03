@@ -21,49 +21,39 @@
         </div>
         <div class="third-block">
             <img class="third-block__alert" src="@/assets/img/nav-img/bell.svg" alt="">
-            <div class="third-block__login" v-on:click="Log()">
+            <div @click="openAuth()" class="third-block__login">
                 Войти
             </div>
         </div>
     </div>
-    <div class="btn-close" v-if="exitbtn" v-on:click="LogClose()">X</div>
-    <div v-if="login">
-        <Login :login="login" :registr="registr"/>
-    </div>
-    <div v-if="registr">
-        <Registration :login="login" :registr="registr"/>
+    <div v-show="auth">
+        <div @click="closeAuth()" class="btn-close">
+            X
+        </div>
+        <Auth />
     </div>
 </template>
 
 <script>
-
-import Login from "../auth/SignIn.vue";
-import Registration from "../auth/SignUp.vue";
+import Auth from "@/components/auth/Auth"
 
 export default {
+    components: {Auth},
     data: function () {
         return {
-            login: false,
-            registr: false,
-            exitbtn: false,
-        }
-    },
-    components: {
-        Login,
-        Registration,
+            auth: false,
+        };
     },
     methods: {
-        Log() {
-            this.login = true;
-            this.exitbtn = true;
+        openAuth() {
+            this.auth = true
         },
-        LogClose() {
-            this.login = false;
-            this.registr = false;
-            this.exitbtn = false;
+        closeAuth() {
+            this.auth = false
         }
     },
 }
+
 </script>
 
 <style scoped>

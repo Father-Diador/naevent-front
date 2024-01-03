@@ -3,8 +3,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import WebPage from '@/components/WebPage.vue'
 import HomePage from '@/components/content/pages/HomePage.vue'
 import EventCard from '@/components/content/cards/EventCard.vue'
-// import SignIn from '@/components/auth/SignIn.vue'
-// import SignUp from '@/components/auth/SignUp.vue'
+import Auth from '@/components/auth/Auth.vue'
 
 const routes = [
   {
@@ -31,7 +30,15 @@ const routes = [
               title: 'Карточка ивента'
           },
           beforeEnter: scrollToTop,
-      },
+        },
+        {
+          path: 'auth',
+          component: Auth,
+          meta: {
+              title: 'Вход'
+          },
+          beforeEnter: scrollToTop,
+        },
     ],
   },
 ]

@@ -48,6 +48,7 @@ export default {
     methods: {
         getEvents() {
             this.$store.dispatch("loadEvents");
+            console.log("bebe", this.events)
         },
         getEventsisfree() {
             this.$store.dispatch("loadEventsisfree");
